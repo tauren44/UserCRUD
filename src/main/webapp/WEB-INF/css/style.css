@@ -1,0 +1,62 @@
+body{
+    text-align: center;
+}
+
+table {
+    margin: 0 auto;
+    min-width: 40%;
+    border: 3px solid black;
+    border-collapse: collapse;
+}
+
+table tr {
+    line-height: 30px;
+}
+
+table tr th {
+    background: midnightblue;
+    color: #FFF;
+}
+
+table tr td {
+    border: 1px solid #CCC;
+    margin: 5px;
+    text-align: center
+}
+input[type=text], input[type=number]{
+    width: 80%;
+}
+input[type=submit], a{
+    padding: 5px;
+    margin: 5px;
+    color: black;
+    border-radius: 5px;
+    text-align: center;
+}
+a {
+    text-decoration: none;
+}
+
+.id-field {
+    width: 30px;
+}
+
+.column {
+    width: 70px;
+}
+
+.action-column {
+    width: 50px;
+}
+
+.button-delete {
+    background-color: red;
+}
+
+.button-update {
+    background-color: blue;
+}
+
+.button-save {
+    background-color: green;
+}
