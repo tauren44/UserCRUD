@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Objects;
 
 @WebServlet("/register")
 public class UserRegistrationController extends HttpServlet {
@@ -28,9 +29,12 @@ public class UserRegistrationController extends HttpServlet {
         Integer age = Integer.valueOf(request.getParameter("age"));
         Integer salary = Integer.valueOf(request.getParameter("salary"));
 
-        User user = new User(name, age, salary);
+        User user = new User()
+                .setName(name)
+                .setAge(age)
+                .setSalary(salary);
 
-        if (userId == null || userId.equals(""))
+        if (Objects.equals(userId, null))
             dao.saveUser(user);
         else {
             Long id = Long.parseLong(userId);

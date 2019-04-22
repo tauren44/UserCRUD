@@ -4,6 +4,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -17,6 +18,7 @@ import javax.persistence.GenerationType;
 @Getter
 @Setter
 @NoArgsConstructor
+@Accessors(chain = true)
 @EqualsAndHashCode(exclude = {"id"})
 public class User {
 
@@ -33,10 +35,4 @@ public class User {
 
     @Column(name = "salary")
     private Integer salary;
-
-    public User(String name, int age, int salary) {
-        this.name = name;
-        this.age = age;
-        this.salary = salary;
-    }
 }

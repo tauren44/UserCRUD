@@ -18,11 +18,8 @@ public class HomeController extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         List<User> users = dao.getAllUsers();
-
         request.setAttribute("userslist", users);
-
         request.getRequestDispatcher("index.jsp").forward(request, response);
     }
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

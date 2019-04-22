@@ -11,7 +11,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
 
 public class UserDaoImpl implements UserDao {
-    private static UserDaoImpl userDao = null;
+    private static volatile UserDaoImpl userDao = null;
     private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
     @Override
