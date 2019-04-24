@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Optional;
 
 @WebServlet("/delete")
 public class DeleteController extends HttpServlet {
@@ -17,12 +16,12 @@ public class DeleteController extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Optional<String> userId = Optional.ofNullable(request.getParameter("id"));
-        if (!userId.isPresent()) {
+        String userId = request.getParameter("id");
+        if (userId == null) {
             request.getRequestDispatcher("/list").forward(request, response);
         }
         else {
-            Long id = Long.parseLong(userId.get());
+            Long id = Long.parseLong(userId);
             dao.deleteUser(id);
             response.sendRedirect(request.getContextPath() + "/list");
         }

@@ -23,8 +23,8 @@ public class UpdateController extends HttpServlet {
             request.getRequestDispatcher("/list").forward(request, response);
         else {
             Long id = Long.parseLong(userId.get());
-            User user = dao.findUserById(id);
-            request.setAttribute("user", user);
+            Optional<User> user = dao.findUserById(id);
+            request.setAttribute("user", user.get());
             request.getRequestDispatcher("/list").forward(request, response);
         }
     }
