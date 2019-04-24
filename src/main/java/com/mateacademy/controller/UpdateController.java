@@ -18,12 +18,11 @@ public class UpdateController extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Optional<String> userId = Optional.ofNullable(request.getParameter("id"));
-        if (!userId.isPresent())
+        Long targetId = Long.parseLong(request.getParameter("id"));
+        Optional<User> user = dao.findUserById(targetId);
+        if (!user.isPresent())
             request.getRequestDispatcher("/list").forward(request, response);
         else {
-            Long id = Long.parseLong(userId.get());
-            Optional<User> user = dao.findUserById(id);
             request.setAttribute("user", user.get());
             request.getRequestDispatcher("/list").forward(request, response);
         }

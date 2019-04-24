@@ -24,22 +24,24 @@ public class UserRegistrationController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
 
-        Optional<String> userId = Optional.ofNullable(request.getParameter("id"));
+        Long targetId = Long.parseLong(request.getParameter("id"));
+        Optional<User> user = dao.findUserById(targetId);
+
         String name = request.getParameter("name");
         Integer age = Integer.valueOf(request.getParameter("age"));
         Integer salary = Integer.valueOf(request.getParameter("salary"));
 
-        User user = new User()
+        User newUser = new User()
                 .setName(name)
                 .setAge(age)
                 .setSalary(salary);
 
-        if (!userId.isPresent())
-            dao.saveUser(user);
+        if (!user.isPresent()){
+            dao.saveUser(newUser);
+        }
         else {
-            Long id = Long.parseLong(userId.get());
-            user.setId(id);
-            dao.updateUser(user);
+            newUser.setId(targetId);
+            dao.updateUser(newUser);
         }
         response.sendRedirect(request.getContextPath() + "/list");
     }
