@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Objects;
+import java.util.Optional;
 
 @WebServlet("/register")
 public class UserRegistrationController extends HttpServlet {
@@ -24,7 +24,7 @@ public class UserRegistrationController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
 
-        String userId = request.getParameter("id");
+        Optional<String> userId = Optional.ofNullable(request.getParameter("id"));
         String name = request.getParameter("name");
         Integer age = Integer.valueOf(request.getParameter("age"));
         Integer salary = Integer.valueOf(request.getParameter("salary"));
@@ -34,10 +34,10 @@ public class UserRegistrationController extends HttpServlet {
                 .setAge(age)
                 .setSalary(salary);
 
-        if (Objects.equals(userId, null))
+        if (!userId.isPresent())
             dao.saveUser(user);
         else {
-            Long id = Long.parseLong(userId);
+            Long id = Long.parseLong(userId.get());
             user.setId(id);
             dao.updateUser(user);
         }
